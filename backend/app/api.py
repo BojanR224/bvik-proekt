@@ -1,6 +1,7 @@
+import string
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from aleph_client.synchronous import create_aggregate
+from aleph_client.synchronous import create_aggregate, get_messages
 
 app = FastAPI()
 
@@ -24,6 +25,13 @@ app.add_middleware(
 @app.get("/", tags=["root"])
 async def read_root() -> dict:
     return {"message": "Welcome to your todo list."}
+
+@app.get("/v1/{id}")
+async def list_all_messages(id: str):
+    aggregate = await get_messages()
+    return aggregate
+
+
 
 # button 
 # function
