@@ -26,10 +26,10 @@ app.add_middleware(
 async def read_root() -> dict:
     return {"message": "Welcome to your todo list."}
 
-@app.get("/v1/{id}")
-async def list_all_messages(id: str):
-    aggregate = await get_messages()
-    return aggregate
+# @app.get("/v1/{id}")
+# async def list_all_messages(id: str):
+#     aggregate = await get_messages()
+#     return aggregate
 
 
 
