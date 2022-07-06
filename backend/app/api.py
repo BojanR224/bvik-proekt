@@ -40,16 +40,4 @@ async def get_nft(nft) -> dict:
 async def put_nft() -> dict:
     return None
 
-# vo urlto netywork/id
-
-# @app.get("/v1/{id}")
-# async def list_all_messages(id: str):
-#     aggregate = await get_messages()
-#     return aggregate
-
-
-
-# button 
-# function
-# create_aggreate
-# 
+# vo urlto network/id
