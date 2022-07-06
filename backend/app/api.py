@@ -27,13 +27,20 @@ app.add_middleware(
 )
 
 
-@app.get("/", tags=["root"])
-async def read_root(nft) -> dict:
+# get : da zima spesificno nft od cel json
+@app.get("/put", tags=["root"])
+async def get_nft(nft) -> dict:
     nft_json = await fetch_aggregate(account.get_address(), 'bvik-proekt')
 
     #aggregate_message = await create_aggregate(account, key='bvik-proekt', content={'2':2}, address='0xeB1ebA7a4fa4F05e369035c7f97C0f046F550C28')
     return {"message": json.loads(nft_json)}
 
+# put : dodavame nft vo kolekcijata, prva treba da se proveri dali go ima vo kolekicata; ako go ima se menja se "pravi neso"; ako go nema go cel nft vo kolekcija
+@app.get("/get")
+async def put_nft() -> dict:
+    return None
+
+# vo urlto netywork/id
 
 # @app.get("/v1/{id}")
 # async def list_all_messages(id: str):
