@@ -29,7 +29,7 @@ app.add_middleware(
 
 @app.get("/", tags=["root"])
 async def read_root(nft) -> dict:
-    nft_json = await fetch_aggregate(account.get_address(), key='bvik-proekt')
+    nft_json = await fetch_aggregate(account.get_address(), 'bvik-proekt')
 
     #aggregate_message = await create_aggregate(account, key='bvik-proekt', content={'2':2}, address='0xeB1ebA7a4fa4F05e369035c7f97C0f046F550C28')
     return {"message": json.loads(nft_json)}
