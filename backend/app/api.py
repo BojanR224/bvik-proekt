@@ -34,12 +34,13 @@ async def root() -> dict:
 
 # get : da zima spesificno nft od cel json
 @app.get("/get")
-async def get_nft():
+async def get_nft() -> str:
     #nft_json = fetch_aggregate(account.get_address(), key='bvik-proekt')
 
-    aggregate_message = create_aggregate(account, key='key', content={'asd': 23}, address='0xeB1ebA7a4fa4F05e369035c7f97C0f046F550C28')
-
-    return aggregate_message
+    aggregate_message = create_aggregate(account, key='key', content={'id': 23}, address='0xeB1ebA7a4fa4F05e369035c7f97C0f046F550C28')
+    json_message = json.dumps(aggregate_message)
+    #print(json_message['item_content']['content']['id'])
+    return None
 
 # put : dodavame nft vo kolekcijata, prva treba da se proveri dali go ima vo kolekicata; ako go ima se menja se "pravi neso"; ako go nema go cel nft vo kolekcija
 @app.get("/put")
