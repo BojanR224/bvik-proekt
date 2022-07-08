@@ -43,26 +43,30 @@ async def root() -> dict:
 # contract e klucot
 # id e adresata na nft
 
+# @app.get("/list")
+# async def get_messages() -> dict:
+
+
 @app.get("/{contract}/{id}")
 async def get_nft(contract: str, id: str) -> dict:
     nft_json = fetch_aggregate(account.get_address(), key=contract)
-    nft_json = json.dumps(nft_json)
 
+    nft_json = json.dumps(nft_json)
     data = json.loads(nft_json)
-    
-    return {id: data[id]}
+
+    if id in data.keys():
+        return {id: data[id]}
+
+    return None
 
 # put : dodavame nft vo kolekcijata, prva treba da se proveri dali go ima vo kolekicata; ako go ima se menja se "pravi neso"; ako go nema go cel nft vo kolekcija
 
 @app.put("/{contract}/{id}")
-async def put_nft(contract: str, id: str, json: str) -> dict:
-    nft_json = fetch_aggregate(account.get_address(), key=contract)
-    nft_json = json.dumps(nft_json)
+async def put_nft(contract: str, id: str, name: str, description: str, link: str) -> dict:
+    nft = get_nft(contract, id)
+        
+    # aggregate_message = create_aggregate(account, key='key', content=nft, address='0xeB1ebA7a4fa4F05e369035c7f97C0f046F550C28')
 
-    #aggregate_message = create_aggregate(account, key='key', content={'id': 23}, address='0xeB1ebA7a4fa4F05e369035c7f97C0f046F550C28')
-    #json_message = json.dumps(aggregate_message)
-    #print(json_message['item_content']['content']['id'])
-
-    return nft_json
+    return {"Aggregate": nft}
 
 # vo urlto network/id
