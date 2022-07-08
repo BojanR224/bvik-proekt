@@ -35,18 +35,22 @@ class NFT(BaseModel):
 async def root() -> dict:
     nft = NFT(name="Dalmation", description="White dog with black dots", link="https://www.purina-arabia.com/sites/default/files/styles/ttt_image_510/public/2021-02/BREED%20Hero%20Mobile_0127_dalmatian_0.jpg?itok=fLkVjLXs&fbclid=IwAR0z7M6c7CN_RRff2q8zyX8cR4BugfYBkT1ypm45x4rUgPGx-eKGp8e9o4g")
     nft = nft.json()
-    aggregate_message = create_aggregate(account, key='key', content=nft, address='0xeB1ebA7a4fa4F05e369035c7f97C0f046F550C28')
+    nft = json.loads(nft)
+    nft = {2: nft}
+    aggregate_message = create_aggregate(account, key='test_channel_1', content=nft, address='0xeB1ebA7a4fa4F05e369035c7f97C0f046F550C28')
     return None
 
 # contract e klucot
 # id e adresata na nft
 
-@app.get("/{key}")
+@app.get("/get")
 async def get_nft(contract: str, id: str) -> dict:
     nft_json = fetch_aggregate(account.get_address(), key=contract)
     nft_json = json.dumps(nft_json)
+
+    data = json.loads(nft_json)
     
-    return nft_json[id]
+    return {id: data[id]}
 
 # put : dodavame nft vo kolekcijata, prva treba da se proveri dali go ima vo kolekicata; ako go ima se menja se "pravi neso"; ako go nema go cel nft vo kolekcija
 
