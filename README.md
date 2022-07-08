@@ -3,7 +3,7 @@
  # Setting up env
  pip install libsecp256k1
 
- pip install uvicorn
+ pip install hypercorn["trio"]
 
  pip install fastapi
 
