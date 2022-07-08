@@ -43,7 +43,7 @@ async def root() -> dict:
 # contract e klucot
 # id e adresata na nft
 
-@app.get("/get")
+@app.get("/{contract}/{id}")
 async def get_nft(contract: str, id: str) -> dict:
     nft_json = fetch_aggregate(account.get_address(), key=contract)
     nft_json = json.dumps(nft_json)
