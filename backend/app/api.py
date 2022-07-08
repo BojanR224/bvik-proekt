@@ -54,7 +54,7 @@ async def get_nft(contract: str, id: str) -> dict:
 
 # put : dodavame nft vo kolekcijata, prva treba da se proveri dali go ima vo kolekicata; ako go ima se menja se "pravi neso"; ako go nema go cel nft vo kolekcija
 
-@app.get("/{contract}/{id}")
+@app.put("/{contract}/{id}")
 async def put_nft(contract: str, id: str, json: str) -> dict:
     nft_json = fetch_aggregate(account.get_address(), key=contract)
     nft_json = json.dumps(nft_json)
@@ -64,6 +64,5 @@ async def put_nft(contract: str, id: str, json: str) -> dict:
     #print(json_message['item_content']['content']['id'])
 
     return nft_json
-
 
 # vo urlto network/id
